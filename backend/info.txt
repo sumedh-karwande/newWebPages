@@ -1,0 +1,2 @@
+project name:ecommerce
+entry point:backend/server.js
