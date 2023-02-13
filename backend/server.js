@@ -1,8 +1,8 @@
 // Server js file
 
-import app from './app.js';
-import dotenv from 'dotenv';
-import connectDatabase from './config/database.js';
+const app = require("./app");
+const dotenv=require('dotenv');
+const connectDatabase = require("./config/database");
 
 // config
 dotenv.config({path:'backend/config/config.env'})

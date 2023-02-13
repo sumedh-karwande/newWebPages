@@ -1,2 +1,7 @@
 project name:ecommerce
 entry point:backend/server.js
+
+
+
+github link
+https://github.com/meabhisingh/mernProjectEcommerce
