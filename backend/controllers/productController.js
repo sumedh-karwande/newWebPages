@@ -1,6 +1,7 @@
 //
 
 const Product = require("../models/productModel");
+const ErrorHander = require("../utils/errorHandler");
 
 // create product --admin--
 exports.createProduct = async (req, res, next) => {
@@ -24,10 +25,11 @@ exports.getAllProducts = async (req, res, next) => {
 exports.updateProduct = async (req, res, next) => {
 	let product = await Product.findById(req.params.id);
 	if (!product) {
-		return res.status(500).json({
-			sucess: false,
-			message: "Product not found",
-		});
+		return next(new ErrorHander("Product not found", 404));
+		// return res.status(500).json({
+		// 	sucess: false,
+		// 	message: "Product not found",
+		// });
 	}
 	product = await Product.findByIdAndUpdate(req.params.id, req.body, {
 		new: true,
@@ -44,10 +46,7 @@ exports.updateProduct = async (req, res, next) => {
 exports.getProductDetails = async(req ,res ,next) => {
 	const product = await Product.findById(req.params.id);
 	if(!product){
-		res.status(500).json({
-			sucess :false ,
-			message :'Product not found'
-		})
+		return next(new ErrorHander("Product not found", 404));
 	}
 	
 	res.status(200).json({
@@ -60,10 +59,11 @@ exports.getProductDetails = async(req ,res ,next) => {
 exports.deleteProduct = async (req ,res ,next) =>{
 	const product = await Product.findById(req.params.id);
 	if(!product){
-		return res.status(500).json({
-			sucess :false ,
-			message:'Product not found'
-		})
+		return next(new ErrorHander("Product not found", 404));
+		// return res.status(500).json({
+		// 	sucess :false ,
+		// 	message:'Product not found'
+		// })
 		
 	}
 	await product.remove();
