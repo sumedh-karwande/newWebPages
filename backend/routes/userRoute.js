@@ -38,20 +38,13 @@ router
 	.route("/admin/user/:id")
 	.get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser);
 
-// router
-// 	.route("/admin/user/:id")
-// 	.put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole);    
+
+router
+	.route("/admin/user/:id")
+	.delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);    
+
+router.route("/admin/user/:id").put(isAuthenticatedUser, updateUserRole);  
 
 
-// router
-// 	.route("/delete")
-// 	.delete(deleteUser);    
-
-// router
-// 	.route("/admin/user/:id")
-// 	.get(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole);
-
-//   .put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole)
-//   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
 
 module.exports = router;
