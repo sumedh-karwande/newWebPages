@@ -1,7 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
-import RatReactStarsing from "react-rating-stars-component"
+import RatReactStarsing from "react-rating-stars-component";
 import { Rating } from "@material-ui/lab";
 
 const ProductCard = ({ product }) => {
