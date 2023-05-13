@@ -4,7 +4,7 @@ import "./Home.css";
 import ProductCard from "./ProductCard";
 // import axios from "axios" ;
 import {getProduct} from "../../actions/productAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { CgMouse } from "react-icons/all";
 
 
@@ -22,23 +22,11 @@ const Home = () => {
 	useEffect (()=>{
 		dispatch(getProduct());
 	},[dispatch])
+	
+const {loading,error,productsCount,products} = useSelector((state)=>state.products);
+console.log("products",products);
 
-	useEffect( ()=>{
 
-		fetch('http://localhost:4000/api/v1/products')
-		.then(response => {  
-		  console.log(response);
-			return response.json();
-		})
-		.then(data => {
-		  //handle data
-		  console.log(data);
-		})
-		.catch(error => {
-		  console.log(error);
-		  //handle error
-		});
-	  },[] ); 
 	return (
 		<Fragment>
 			<MetaData title="Ecommerce" />
@@ -56,13 +44,10 @@ const Home = () => {
 
 			<h2 className="homeHeading">Featured Products</h2>
 			<div className="container" id="container">
-				<ProductCard product={product} />
-				<ProductCard product={product} />
-				<ProductCard product={product} />
-				<ProductCard product={product} />
-				<ProductCard product={product} />
-				<ProductCard product={product} />
-				<ProductCard product={product} />
+			{products &&
+              products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
 			</div>
 		</Fragment>
 	);
