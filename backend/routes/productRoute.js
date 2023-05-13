@@ -26,7 +26,7 @@ router
 	.route("/product/:id")
 	.put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct)
 	.delete(isAuthenticatedUser, authorizeRoles("admin"), deleteProduct)
-	.get(isAuthenticatedUser, getProductDetails);
+	.get(getProductDetails);
 
 router.route("/review").put(isAuthenticatedUser, createProductReview);
 
