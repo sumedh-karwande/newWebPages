@@ -4,10 +4,14 @@ import {ALL_PRODUCT_REQUEST ,ALL_PRODUCT_FAIL  ,ALL_PRODUCT_SUCCESS ,PRODUCT_DET
 } from "../constant/productConstant";
 
 // Get All Products
-export const getProduct = ()=> async (dispatch) =>{ 
+export const getProduct = (searchInput )=> async (dispatch) =>{ 
+  
     try{
         dispatch ({ type: ALL_PRODUCT_REQUEST});
-        const {data} = await axios.get("http://localhost:4000/api/v1/products");
+        // const {data} = await axios.get("http://localhost:4000/api/v1/products");
+        let link=`http://localhost:4000/api/v1//products?keyword=${searchInput}`;
+        console.log("keyword action",link);
+        const {data} = await axios.get(link);
         dispatch({
             type :ALL_PRODUCT_SUCCESS ,
             payload :data 
@@ -16,7 +20,7 @@ export const getProduct = ()=> async (dispatch) =>{
     catch (error) {
         dispatch({
             type :ALL_PRODUCT_FAIL ,
-            payload :error.response.data.message
+            payload :error?.response?.data?.message
         })
        
     }
@@ -31,12 +35,12 @@ export const getProduct = ()=> async (dispatch) =>{
   
       dispatch({
         type: PRODUCT_DETAILS_SUCCESS,
-        payload: data.product,
+        payload: data?.product,
       });
     } catch (error) {
       dispatch({
         type: PRODUCT_DETAILS_FAIL,
-        payload: error.response.data.message,
+        payload: error?.response?.data?.message,
       });
     }
   };
