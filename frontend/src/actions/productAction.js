@@ -4,13 +4,12 @@ import {ALL_PRODUCT_REQUEST ,ALL_PRODUCT_FAIL  ,ALL_PRODUCT_SUCCESS ,PRODUCT_DET
 } from "../constant/productConstant";
 
 // Get All Products
-export const getProduct = (searchInput )=> async (dispatch) =>{ 
+export const getProduct = (searchInput='' )=> async (dispatch) =>{ 
   
     try{
         dispatch ({ type: ALL_PRODUCT_REQUEST});
         // const {data} = await axios.get("http://localhost:4000/api/v1/products");
         let link=`http://localhost:4000/api/v1//products?keyword=${searchInput}`;
-        console.log("keyword action",link);
         const {data} = await axios.get(link);
         dispatch({
             type :ALL_PRODUCT_SUCCESS ,

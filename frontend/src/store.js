@@ -10,7 +10,7 @@ import {SearchReducer} from "./reducers/search"
 const reducer = combineReducers({
     products: productsReducer,
     productDetails:productDetailsReducer ,
-    serachProduct :SearchReducer 
+    searchProduct :SearchReducer 
 });
 
 let initialState = {};

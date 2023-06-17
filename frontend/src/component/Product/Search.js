@@ -3,16 +3,16 @@ import MetaData from "../layout/MetaData";
 import { useNavigate } from "react-router-dom";
 import "./Search.css";
 import { getSearchInput } from "../../actions/searchAction";
-import { useDispatch  } from "react-redux";
+import { useDispatch ,useSelector  } from "react-redux";
 
 const Search = () => {
     const dispatch=useDispatch();
-    
+    const {searchInput}=useSelector((state)=>state.searchProduct);
     const navigate = useNavigate();
 	const searchSubmitHandler = (e) => {
 		e.preventDefault();
 		
-        navigate("/products");
+        navigate(`/products/${searchInput}`);
 	};
 	return (
 		<>
