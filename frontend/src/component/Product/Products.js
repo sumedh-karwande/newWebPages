@@ -14,16 +14,29 @@ const Products = () => {
 	const [currentPage, setCurrentPage] = useState(1);
   const [price, setPrice] = useState([0, 25000]);
 	const [totalPages, settotalPage] = useState(0);
+  const [category, setCategory] = useState("");
+
+  // categories for filter
+  const categories = [
+    "Laptop",
+    "Footwear",
+    "Bottom",
+    "Tops",
+    "Attire",
+    "Camera",
+    "SmartPhones",
+  ];
+
 	const { products, loading, error, resultPerPage, productsCount } =
 		useSelector((state) => state.products);
 	const { searchInput } = useSelector((state) => state.searchProduct);
 	useEffect(() => {
 		if (error) {
-			alert.error(error);
+			// alert.error(error);
 			dispatch(clearErrors());
 		}
-		dispatch(getProduct(searchInput,price));
-	}, [dispatch, searchInput,price, error]);
+		dispatch(getProduct(searchInput,price,category));
+	}, [dispatch, searchInput,price,category, error]);
 	console.log("products", products);
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice);
@@ -34,7 +47,7 @@ const Products = () => {
   // Pagenation
 	const itemsPerPage = 5;
 	useEffect(() => {
-		settotalPage(Math.ceil(products.length / itemsPerPage));
+		settotalPage(Math.ceil(products?.length / itemsPerPage));
 	},[]);
 	const handlePageChange = (newPage) => {
 		setCurrentPage(newPage);
@@ -88,7 +101,22 @@ const Products = () => {
               min={0}
               max={25000}
             />
+
+<Box>Categories</Box>
+            <ul className="categoryBox">
+              {categories.map((category) => (
+                <li
+                  className="category-link"
+                  key={category}
+                  onClick={() => setCategory(category)}
+                >
+                  {category}
+                </li>
+              ))}
+              </ul>
             </div>
+
+           
 					{totalPages > 1 && (
 						<div className="paginationBox">
 							<Button onClick={handlePrevClick} disabled={preDisabled}>
