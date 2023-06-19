@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import Loader from "../layout/Loader/Loader";
+import MetaData from "../layout/MetaData";
 
 const ProductDetails = ({ match }) => {
 	const { id } = useParams();
@@ -30,7 +31,8 @@ const ProductDetails = ({ match }) => {
 			{loading ? (
 				<Loader />
 			) : (
-				<>
+				<>   
+				     <MetaData  title={`${product?.name} -- ECOMMERCE`} />
 					<div className="ProductDetails">
 						<div>
 							<Carousel>
